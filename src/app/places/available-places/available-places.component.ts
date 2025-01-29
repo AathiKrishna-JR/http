@@ -18,9 +18,12 @@ export class AvailablePlacesComponent implements OnInit {
   places = signal<Place[] | undefined>(undefined);
   private httpClient = inject(HttpClient);
   ngOnInit() {
-  const subscription = this.httpClient.get('https://jsonplaceholder.typicode.com/todos/1').subscribe({
-    next : (resData) => {
-      console.log(resData);
+  const subscription = this.httpClient.get('https://jsonplaceholder.typicode.com/todos/1',{
+    observe : 'response'
+  })
+  .subscribe({
+    next : (response) => {
+      console.log(response.body);
       
     }
   });
